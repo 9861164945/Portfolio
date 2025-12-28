@@ -1,19 +1,23 @@
+document.addEventListener("DOMContentLoaded", () => {
 const contactForm = document.querySelector("[data-form]");
 
-contactForm.addEventListener("submit", function (e) {
-  e.preventDefault();
+if (!contactForm) return;
 
-  emailjs.sendForm(
-    "service_ggep3cb",
-    "template_2p9q6ii",
-    contactForm
-  )
-  .then(() => {
-    alert("Message Delivered Successfully ✅");
-    contactForm.reset();
-  })
-  .catch((err) => {
-    console.error(err);
-    alert("Email failed ❌");
-  });
+contactForm.addEventListener("submit", function (e) {
+e.preventDefault(); // ⛔ stops map jump
+
+emailjs.sendForm(
+"service_ggep3cb",
+"template_2p9q6ii",
+contactForm
+)
+.then(() => {
+alert("Message sent successfully ✅");
+contactForm.reset();
+})
+.catch((err) => {
+console.error("EmailJS Error:", err);
+alert("Email failed ❌");
+});
+});
 });
